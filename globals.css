@@ -1,0 +1,41 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Inter:500,400|Roboto:400");
+* {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0px;
+  height: 100%;
+}
+/* a blue color as a generic focus style */
+button:focus-visible {
+  outline: 2px solid #4a90e2 !important;
+  outline: -webkit-focus-ring-color auto 5px !important;
+}
+a {
+  text-decoration: none;
+}
+@font-face {
+  font-family: "Font Awesome 6 Free-Solid";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/626463e44f3101114bbb00df/fonts/font-awesome-6-free-solid-900.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AmstelvarAlpha-Default";
+  src: url("https://anima-uploads.s3.amazonaws.com/5ba4612344b517000b5d2278/AmstelvarAlpha-VF.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands-Regular";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/62ecee36f806039f7be74d84/fonts/font-awesome-6-brands-regular-400.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free-Regular";
+  src: url("https://anima-uploads.s3.amazonaws.com/projects/626463e44f3101114bbb00df/fonts/font-awesome-6-free-regular-400.otf")
+    format("opentype");
+}
