@@ -1,18 +1,4 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Replace these with your actual database credentials
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "pufflab_db";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // Get form data
     $feedback = $conn->real_escape_string($_POST["feedback"]);
@@ -26,8 +12,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    // Close connection
-    $conn->close();
-}
+    
 ?>

@@ -7,7 +7,6 @@
     border: none; 
     outline: none; 
     font-family: 'Poppins', sans-serif; 
-    text-transform: capitalize; 
     transition: all 0.2s linear; 
 } 
   
@@ -17,7 +16,7 @@
     align-items: center; 
     min-height: 100vh; 
     padding: 25px; 
-    background: #b4ce3e; 
+    background-color: #faf29d; 
 } 
   
 .container form { 
