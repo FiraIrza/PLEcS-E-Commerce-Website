@@ -1,54 +1,57 @@
 <?php
-// Start the session if not already started
 session_start();
 
-$host = 'localhost';
-$dbname = 'payment_db';
-$username = 'root';
-$password = '';
+include 'DatabaseConnection.php';
+//include 'get_payment_amount.php';
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-}
 
-// Check if the form is submitted
+$conn = connectToDatabase();
+
+
+// Collect data from the form
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+    $username = $_POST['user_name'];
     $address = $_POST['address'];
+    $zipcode = $_POST['zip_code'];
     $city = $_POST['city'];
     $state = $_POST['state'];
-    $zip = $_POST['zip'];
-    $cardName = $_POST['cardName'];
-    $cardNum = $_POST['cardNum'];
-    $expMonth = $_POST['expMonth'];
-    $expYear = $_POST['expYear'];
-    $cvv = $_POST['cvv'];
+    $country = $_POST['country'];
+    $paymentdate = $_POST['payment_date'];
+    $paymentmethod = $_POST['payment_method'];
 
-    // Check if the record already exists based on email
-    $stmt = $pdo->prepare("SELECT * FROM payments WHERE email = ?");
-    $stmt->execute([$email]);
-    $existingRecord = $stmt->fetch();
+    
+    //$amount = getPaymentAmount();
 
-    if ($existingRecord) {
-        // Update the existing record
-        $stmt = $pdo->prepare("UPDATE payments SET name=?, address=?, city=?, state=?, zip=?, card_num=?, card_number=?, exp_month=?, exp_year=?, cvv=? WHERE email=?");
-        $stmt->execute([$name, $address, $city, $state, $zip, $cardNum, $expMonth, $expYear, $cvv, $email]);
-    } else {
-        // Insert data into the database
-        $stmt = $pdo->prepare("INSERT INTO payments (name, email, address, city, state, zip, card_num, card_number, exp_month, exp_year, cvv) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $email, $address, $city, $state, $zip, $cardNum, $expMonth, $expYear, $cvv]);
+    // Insert data into the database
+    $sql = "INSERT INTO plecs_payments (payment_date, payment_method, amount, user_name) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssss", $paymentdate, $paymentmethod, $amount, $username);
+    $stmt->execute();
+
+    // Check for errors
+    if ($stmt->error) {
+        echo "Error in payment insertion: " . $stmt->error;
+    }
+
+    // Insert shipping information
+    $sql = "INSERT INTO plecs_shipping (address, zip_code, city, state, country, user_name) 
+            VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssss", $address, $zipcode, $city, $state, $country, $username);
+    $stmt->execute();
+
+    // Check for errors
+    if ($stmt->error) {
+        echo "Error in shipping insertion: " . $stmt->error;
     }
 
     // Redirect or perform other actions after successful submission
     header("Location: ordersummary.php");
     exit();
 }
+
+
+$conn->close();
 ?>
 
 
@@ -59,75 +62,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Payment-Page</title>
-    <link rel="stylesheet" href="paymentstyle.css">
+    <link rel="stylesheet" href="./css/paymentstyle.css">
 </head>
 
 <body>
     <div class="container">
-
-        <form id="paymentForm" action="#" method="post">
-
+        <form id="paymentForm" action="ordersummary.php" method="POST">
             <div class="row">
-
                 <div class="col">
                     <h3 class="title">
-                        Billing Address
+                        Shipping Address
                     </h3>
 
                     <div class="inputBox">
-                        <label for="name">
-                            Full Name:
+                        <label for="username">
+                            Username:
                         </label>
-                        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        <input type="text" name="username" placeholder="Enter your full name" required>
                     </div>
 
                     <div class="inputBox">
-                        <label for="email">
-                            Email:
+                        <label for="address">
+                            Address:
                         </label>
-                        <input type="text" id="email" name="email" placeholder="Enter email address" required>
+                        <input type="text" id="address" name="address" placeholder="Enter your address" required>
                     </div>
 
-                    <div class="inputBox"> 
-                        <label for="address"> 
-                              Address: 
-                          </label> 
-                        <input type="text" id="address" 
-                               placeholder="Enter address" 
-                               required> 
-                    </div> 
-  
-                    <div class="inputBox"> 
-                        <label for="city"> 
-                              City: 
-                          </label> 
-                        <input type="text" id="city" 
-                               placeholder="Enter city" 
-                               required> 
-                    </div> 
-  
-                    <div class="flex"> 
-  
-                        <div class="inputBox"> 
-                            <label for="state"> 
-                                  State: 
-                              </label> 
-                            <input type="text" id="state" 
-                                   placeholder="Enter state" 
-                                   required> 
-                        </div> 
-  
-                        <div class="inputBox"> 
-                            <label for="zip"> 
-                                  Zip Code: 
-                              </label> 
-                            <input type="number" id="zip" 
-                                   placeholder="123 456" 
-                                   required> 
-                        </div> 
-  
-                    </div> 
+                    <div class="flex">
+                        <div class="inputBox">
+                            <label for="zipcode">
+                                Zip Code:
+                            </label>
+                            <input type="number" id="zip" name="zipcode" placeholder="XXXXX" required>
+                        </div>
 
+                        <div class="inputBox">
+                            <label for="city">
+                                City:
+                            </label>
+                            <input type="text" id="city" name="city" placeholder="Enter City" required>
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <div class="inputBox">
+                            <label for="state">
+                                State:
+                            </label>
+                            <input type="text" id="state" name="state" placeholder="Enter state" required>
+                        </div>
+
+                        <div class="inputBox">
+                            <label for="country">
+                                Country:
+                            </label>
+                            <input type="text" id="country" name="country" placeholder="Enter Country" required>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col">
@@ -137,73 +128,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label for="name">
                             Card Accepted:
                         </label>
-                        <img src="./images/card_img.png" alt="credit/debit card image">
+                        <img src="./img/visa.png" alt="credit/debit card image">
                     </div>
 
                     <div class="inputBox">
-                        <label for="cardName">
-                            Name On Card:
+                        <label for="paymentmethod">
+                            Payment Method:
                         </label>
-                        <input type="text" id="cardName" name="cardName" placeholder="Enter card name" required>
+                        <input type="text" id="cardName" name="payment_method" placeholder="Enter payment method" required>
                     </div>
 
-                    <div class="inputBox"> 
-                        <label for="cardNum"> 
-                              Credit Card Number: 
-                          </label> 
-                        <input type="text" id="cardNum" 
-                               placeholder="1111-2222-3333-4444" 
-                               maxlength="19" required> 
-                    </div> 
-  
-                    <div class="inputBox"> 
-                        <label for="">Exp Month:</label> 
-                        <select name="" id=""> 
-                            <option value="">Choose month</option> 
-                            <option value="January">January</option> 
-                            <option value="February">February</option> 
-                            <option value="March">March</option> 
-                            <option value="April">April</option> 
-                            <option value="May">May</option> 
-                            <option value="June">June</option> 
-                            <option value="July">July</option> 
-                            <option value="August">August</option> 
-                            <option value="September">September</option> 
-                            <option value="October">October</option> 
-                            <option value="November">November</option> 
-                            <option value="December">December</option> 
-                        </select> 
-                    </div> 
-  
-  
-                    <div class="flex"> 
-                        <div class="inputBox"> 
-                            <label for="">Exp Year:</label> 
-                            <select name="" id=""> 
-                                <option value="">Choose Year</option> 
-                                <option value="2023">2023</option> 
-                                <option value="2024">2024</option> 
-                                <option value="2025">2025</option> 
-                                <option value="2026">2026</option> 
-                                <option value="2027">2027</option> 
-                            </select> 
-                        </div> 
-  
-                        <div class="inputBox"> 
-                            <label for="cvv">CVV</label> 
-                            <input type="number" id="cvv" 
-                                   placeholder="1234" required> 
-                        </div>                
+                    <div class="inputBox">
+                        <label for="paymentDate">Date:</label>
+                        <input type="date" name="paymentdate" id="payment_date" value="<?php echo date('Y-m-d'); ?>" required>
+                    </div>
 
+                    <input type="submit" value="Make Payment" class="submit_btn" id="submit_btn">
                 </div>
-
             </div>
-
-            <input type="submit" value="Make Payment" class="submit_btn" id="submit_btn">
         </form>
     </div>
-
-    <script type="text/javascript" src="./payment.js"></script>
 </body>
 
 </html>

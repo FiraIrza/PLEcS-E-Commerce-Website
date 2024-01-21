@@ -1,0 +1,105 @@
+<?php include 'header.php'; ?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puff Lab About Us</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="./css/aboutUs.css">
+</head>
+
+<body>
+
+    <section id="about" class="section-p1">
+        <div class="box">
+            <h2>About Us</h2>
+            <p>Where every puff is an amazing journey through the clouds, guarantees a flavor-filled journey that is
+                sure to satisfy your cravings for sizzle and swirl. </p>
+        </div>
+    </section>
+
+    <section id="history" class="section-p1">
+        <div class="imgbox">
+            <img class="pic" src="img/gp.png">
+        </div>
+
+        <div class="text">
+            <div class="cont">
+                <h3>History</h3>
+                <p>Puff Lab was founded by Mdm Azizah Sayan binti Lukman Hakim and Grace Chong in the year of 2019 and
+                    completed its legal establishment in 2020. Mr Yazid Rizman (CEO) join them a slightly time later.
+                    The business started off with a dedication to making the perfect cream puff with just one permanent
+                    staff member, enhanced by a group of about ten students working part-time, who made up the most of
+                    the workforce.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="section-p1">
+        <div class="box2">
+            <h3>Our Mission</h3>
+            <p>At PuffLab, our mixologists create magic in every cup, and our ovens roar with passion. Our goal is to
+                make people smile by creating delicious cream puffs and beverages, which is a straightforward yet
+                profound mission. Every product we produce is evidence of our dedication to excellence, originality, and
+                your pleasure.</p>
+        </div>
+        <div class="image-container">
+            <img class="pic2" src="img/logo1.png">
+        </div>
+    </section>
+
+    <section id="why" class="section-p1">
+        <div class="container">
+            <img class="pic3" src="img/pic.jpg">
+        </div>
+        <div class="caption">
+            <h3>Why Puff Lab?</h3>
+            <ul>
+                <li>🍰 Divine Cream Puffs: Savor our divine cream puffs, where each bite is a sensory extravaganza of
+                    flavors and textures.</li>
+                <li>☕ Artisanal Beverages: Enjoy handcrafted beverages that provide a symphony of flavors to your taste
+                    buds.</li>
+                <li>🎉 Celebrate with Us: Whether it's a special occasion or an ordinary day, PuffLab is your partner in
+                    creating sweet memories.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="joys" class="section-p1">
+        <div class="contain">
+            <h3>Two Years of Delightful Memories and Endless Joys</h3>
+            <p>Two Years of Delightful Memories and Endless Joys
+                We would like to express our sincere gratitude to you for the past two years. Thanks to your affection
+                for our cream puffs and drinks, PuffLab has grown from a store to a community of taste enthusiasts and
+                joy seekers.
+            <p>Cheers to another year of making, enjoying, and spreading sweetness with each other!</p>
+            <p>Kindly regards,<br>
+                The PuffLab Team 🍰🥂</p>
+        </div>
+    </section>
+
+    <section id="images" class="section-p1">
+        <div class="image">
+            <img src="img/image1.jpg">
+            <img src="img/image2.jpg">
+            <img src="img/image3.jpg">
+        </div>
+    </section>
+
+    <section id="last" class="section-p1">
+        <div class="order">
+            <h3>Enjoy Heavenly Cream Puffs and Drinks at PuffLab:<br>
+                Your Heaven for Delightful Treats!</h3>
+            <a href="allProduct.php"><button class="ordernow">Order Now</button></a>
+        </div>
+    </section>
+
+</body>
+
+</html>
+
+<?php include 'footer.php'; ?>

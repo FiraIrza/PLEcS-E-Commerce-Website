@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    line-height: 65px;
+    user-select: none;
+    font-size: 22px;
+    z-index: 1000; /* Set a high z-index value */
+}
+
+
+.container {
+    /* Your container styles go here */
+    margin-top: 100px; /* Adjust margin to accommodate the fixed header */
+    padding: 20px; /* Add padding to avoid content overlapping with the fixed header */
+}
+
+
+header ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+header ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+header ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+ul li:hover a{
+    background: #FFCb46;
+    border-radius: 0 30px 30px 0;
+}
+
