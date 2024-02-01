@@ -10,6 +10,7 @@
     //$Username = $_SESSION["Username"];
 
     // Fetch data from the database
+    // Code for Analytics Chart
     $conn = connectToDatabase();
 
     $revenueData = array();
@@ -32,10 +33,14 @@
         while ($row = $revenueResult->fetch_assoc()) {
             // Extract month from the date (assuming date is in Y-m-d format)
             $month = date('M', strtotime($row['payment_date']));
+            $year = date('Y', strtotime($row['payment_date']));
 
             $revenueData['labels'][] = $month;
+            $revenueData['title'][] = $year;
             $revenueData['datasets'][0]['data'][] = $row['amount'];
         }
+        // Add the year as a title
+        $revenueData['title'] = $year;
     }
 
     // Fetch product data
@@ -71,21 +76,24 @@ if(!isset($_SESSION["Username"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puff Lab Admin</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
 
-<h1>Market Analysis</h1></br></br>
-    <canvas id="myPieChart" width="5px" height="5px"></canvas>
-    </br></br></br></br></br>
-    <h1>Revenue Analysis</h1></br></br>
-    <canvas id="revenueChart" width="10px" height="5px"></canvas>
+    <section>
+    <h1>Market Analysis</h1>
+    <canvas class="chart" id="myPieChart" ></canvas>
+    </section>
+    <br><br>
+    <section>
+    <h1>Revenue Analysis</h1>
+    <canvas class="chart" id="revenueChart" ></canvas>
 
 
-<script>
+    <script>
 window.onload = function() 
 {
   // Use PHP-generated data
@@ -106,6 +114,12 @@ window.onload = function()
                   beginAtZero: true,
               },
           },
+          plugins: {
+            title: {
+                display: true,
+                text: 'Revenue Chart (' + <?php echo json_encode($revenueData['title']); ?> + ')'
+            }
+        }
       },
   });
 
@@ -117,11 +131,19 @@ window.onload = function()
   {
     type: 'pie',
     data: productData,
+    options: {
+          plugins: {
+            title: {
+                display: true,
+                text: 'Hot Item Chart (' + <?php echo json_encode($revenueData['title']); ?> + ')'
+            }
+        }
+      },
   }); 
 };
 
 </script>
 
-    </body>
+</body>
 
 </html>

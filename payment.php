@@ -1,11 +1,11 @@
 <?php
 session_start();
 
-include 'DatabaseConnection.php';
-//include 'get_payment_amount.php';
-
+require_once 'DatabaseConnection.php';
+//include 'header.php';
 
 $conn = connectToDatabase();
+
 
 
 // Collect data from the form
@@ -20,7 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $paymentmethod = $_POST['payment_method'];
 
     
-    //$amount = getPaymentAmount();
+    
+    $amount = Payment::getPaymentAmount($cart->grandTotal);
+
 
     // Insert data into the database
     $sql = "INSERT INTO plecs_payments (payment_date, payment_method, amount, user_name) VALUES (?, ?, ?, ?)";
@@ -78,7 +80,7 @@ $conn->close();
                         <label for="username">
                             Username:
                         </label>
-                        <input type="text" name="username" placeholder="Enter your full name" required>
+                        <input type="text" name="username" placeholder="Enter your user name" required>
                     </div>
 
                     <div class="inputBox">
@@ -131,11 +133,15 @@ $conn->close();
                         <img src="./img/visa.png" alt="credit/debit card image">
                     </div>
 
+
                     <div class="inputBox">
-                        <label for="paymentmethod">
-                            Payment Method:
-                        </label>
-                        <input type="text" id="cardName" name="payment_method" placeholder="Enter payment method" required>
+                        <label for="paymentmethod">Payment Method:</label>
+                        <select id="paymentMethod" name="payment_method" required>
+                            <option value="" disabled selected>Select payment method</option>
+                            <option value="Credit Card">VISA</option>
+                            <option value="QR CODE">QR CODE</option>
+                            
+                        </select>
                     </div>
 
                     <div class="inputBox">

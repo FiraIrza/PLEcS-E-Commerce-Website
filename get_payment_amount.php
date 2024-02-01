@@ -1,11 +1,7 @@
 <?php
+include 'cart.php';
 
-function getPaymentAmount() {
-    include 'cart.php';
+$cart = new Cart($grandTotal);
 
-    $grandTotal2 = $grandTotal1;
 
-    
-    return $grandTotal2;
-}
 ?>

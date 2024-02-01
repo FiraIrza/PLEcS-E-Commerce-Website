@@ -14,19 +14,19 @@ html {
 /* Global Styles */
 
 h1 {
-    font-size: 50px;
+    font-size: 40px;
     line-height: 64px;
     color: #222;
 }
 
 h2 {
-    font-size: 16px;
+    font-size: 15px;
     color: #222;
     font-weight: 700;
 }
 
 h3 {
-    font-size: 35px;
+    font-size: 25px;
     line-height: 54px;
     color: #222;
     font-weight: 600;
@@ -97,18 +97,70 @@ body {
     color: white;
 }
 
+/* Style for the container holding the 4 boxes */
 .result-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px; /* Adjust the gap as needed */
 }
 
 /* Style for each box */
 .result-box {
-    flex: 1; /* This makes each box take up equal space */
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border-radius: 40px; /* Adjust border radius as needed */
+    background-color: #a2a2a2;
     padding: 20px;
-    margin: 0;
     text-align: center;
+    width: 250px; /* Set a fixed width for the boxes */
+}
+
+
+/* Style for the container holding market and revenue analysis */
+.page_container {
+    width: 100%;
+    max-width: 1200px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Style for the content within the container */
+.page-content {
+    padding: 20px; /* Add padding around the content */
+}
+
+/* Style for the canvas element (assuming it's within the page content) */
+canvas.chart {
+    display: block; /* Ensure canvas is a block-level element */
+    margin: 0 auto; /* Center the canvas within its container */
+    border: 15px solid #ddd; /* Add a border to the canvas */
+    border-radius: 15px;
+    width: 50%; /* Make the canvas fill its container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+/* Style for the order tables*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px; /* Add some space below the table */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
 
 
