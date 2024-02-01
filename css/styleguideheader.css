@@ -1,0 +1,20 @@
+:root {
+    --black: rgba(30, 40, 50, 1);
+    --dark: rgba(0, 0, 0, 1);
+    --white: rgba(255, 255, 255, 1);
+    --primary: rgba(255, 111, 97, 1);
+    --gravyfa6-navy: rgba(25, 49, 84, 1);
+    --button-font-family: "Roboto-Regular", Helvetica;
+    --button-font-weight: 400;
+    --button-font-size: 18px;
+    --button-letter-spacing: 0px;
+    --button-line-height: normal;
+    --button-font-style: normal;
+    --a-font-family: "OpenSans-Regular", Helvetica;
+    --a-font-weight: 400;
+    --a-font-size: 16px;
+    --a-letter-spacing: 0px;
+    --a-line-height: 24px;
+    --a-font-style: normal;
+  }
+  

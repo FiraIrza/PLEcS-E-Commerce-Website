@@ -1,0 +1,98 @@
+.contact-us {
+    background-color: #ffffff;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.contact-us .div{
+    background-color: #ffffff;
+    flex-direction: column;
+    align-items: center;
+    gap: 90px;
+    position: absolute;
+    background-color: transparent;
+}
+
+.contact-us .overlap{
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    top: 380px;
+    left: 727px;
+    background-color: #d9d9d9;
+    font-family: "Roboto-Regular", Helvetica;
+    box-shadow: 0px 4px 4px #00000040;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    margin-bottom: 8px;
+  }
+
+  input, textarea {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #ffcb46;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Roboto-Regular", Helvetica;
+  }
+
+.contact-us .text-wrapper-3{
+    color: #000000;
+    font-family: "Roboto-Medium", Helvetica;
+    font-size: 40px;
+    font-weight: 500;
+    left: 601px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 204px;
+    white-space: nowrap;
+}
+
+.contact-us .feel-free-to-express{
+    left: 205px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 260px;
+    white-space: nowrap;
+}
+
+.contact-us .span{
+    color: #000000;
+    font-family: "Roboto-Light", Helvetica;
+    font-size: 34px;
+    font-weight: 300;
+    letter-spacing: 0;
+}
+
+.contact-us .quino-al{
+    height: 408px;
+    left: 115px;
+    object-fit: cover;
+    position: absolute;
+    top: 406px;
+    width: 612px;
+}

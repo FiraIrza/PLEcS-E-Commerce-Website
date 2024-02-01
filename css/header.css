@@ -1,0 +1,142 @@
+:root {
+    --black: rgba(30, 40, 50, 1);
+    --dark: rgba(0, 0, 0, 1);
+    --white: rgba(255, 255, 255, 1);
+    --primary: rgba(255, 111, 97, 1);
+    --gravyfa6-navy: rgba(25, 49, 84, 1);
+    --button-font-family: "Roboto-Regular", Helvetica;
+    --button-font-weight: 400;
+    --button-font-size: 18px;
+    --button-letter-spacing: 0px;
+    --button-line-height: normal;
+    --button-font-style: normal;
+    --a-font-family: "OpenSans-Regular", Helvetica;
+    --a-font-weight: 400;
+    --a-font-size: 16px;
+    --a-letter-spacing: 0px;
+    --a-line-height: 24px;
+    --a-font-style: normal;
+  }
+  
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+  }
+  
+  .header .top-header {
+    position: relative;
+    width: 1320px;
+    height: 59px;
+  }
+  
+  .header .line {
+    position: absolute;
+    width: 1320px;
+    height: 1px;
+    top: 58px;
+    left: 0;
+    object-fit: cover;
+  }
+  
+  .header .account {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    position: absolute;
+    top: 4px;
+    left: 990px;
+  }
+  
+  .header .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  
+  .header .icon-free {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .header .icon {
+    position: relative;
+    width: 20px;
+    height: 19px;
+    font-family: "Font Awesome 6 Free-Solid", Helvetica;
+    font-weight: 400;
+    color: #ffcb46;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+  }
+  
+  .header .logo {
+    position: absolute;
+    width: 182px;
+    height: 34px;
+    top: 0;
+    left: 570px;
+  }
+   
+  .header .menu {
+    display: flex;
+    width: 1320px;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  a {
+    text-decoration: none; /* Remove underline */
+    color: #000000; /* Change font color */
+    font-weight: bold; /* Change font weight (e.g., bold) */
+}
+
+/* Style for the link when hovered */
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+    color: #ffcb46; /* Change font color on hover */
+}
+  
+  .header .item-menu {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  
+  .header .item {
+    position: relative;
+    width: fit-content;
+    margin-top: -1px;
+    font-family: var(--a-font-family);
+    font-weight: var(--a-font-weight);
+    color: var(--dark);
+    font-size: var(--a-font-size);
+    letter-spacing: var(--a-letter-spacing);
+    line-height: var(--a-line-height);
+    white-space: nowrap;
+    font-style: var(--a-font-style);
+  }
+  
+  .header .item-wrapper {
+    display: inline-flex;
+    align-items: flex-start;
+    position: relative;
+    flex: 0 0 auto;
+    margin-right: -1px;
+  }
