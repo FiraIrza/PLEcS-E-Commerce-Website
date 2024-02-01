@@ -1,15 +1,20 @@
 <?php
-include 'DatabaseConnection.php';
+
+
+require_once 'DatabaseConnection.php';
 include 'header.php';
 
 $conn = connectToDatabase();
 
 $sourcePage = 'allproduct';
 
+
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $product_id = $_POST['product_id'];
     $user_name = 'user_name';
-
+    
     // Retrieve the source page value
     if (isset($_POST['source_page'])) {
         $sourcePage = $_POST['source_page'];
@@ -19,42 +24,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     $result = $conn->query($sql);
     header("Location: $sourcePage.php?product_id=$product_id");
     exit();
+
 }
+    $sql = "SELECT * FROM plecs_cart";
+    $result = $conn->query($sql);
 
+    if ($result->num_rows > 0) {
+        $products = [];
+        while ($row = $result->fetch_assoc()) {
+            $products[] = [
+                'cart_id' => $row['cart_id'],
+                'quantity' => $row['quantity'],
+                'user_name' => $row['user_name'],
+                'product_id' => $row['product_id']
+            ];
+        }
+    }
 
-$sql = "SELECT * FROM plecs_cart";
-$result = $conn->query($sql);
+    $total = 0;
+    $Total = 0;
 
-if ($result->num_rows > 0) {
-    $products = [];
-    while ($row = $result->fetch_assoc()) {
-        $products[] = [
-            'cart_id' => $row['cart_id'],
-            'quantity' => $row['quantity'],
-            'user_name' => $row['user_name'],
-            'product_id' => $row['product_id']
-        ];
+    if (!empty($products)) 
+    {
+        $total = array_reduce($products, function ($carry, $product) use ($conn) {
+            $productSql = "SELECT * FROM plecs_product WHERE product_id = " . $product['product_id'];
+            $productResult = $conn->query($productSql);
+
+            if ($productResult->num_rows > 0) 
+            {
+                $productData = $productResult->fetch_assoc();
+                $carry += $productData['price'] * $product['quantity'];
+            }
+
+            return $carry;
+        }, 0);
+
+        $Total = $total;
+    }
+    $grandTotal = $Total;
+
+    // cart.php
+class Cart {
+    public $grandTotal;
+
+    function __construct($grandTotal) {
+        $this->grandTotal = $grandTotal;
     }
 }
 
-$total = 0;
-
-if (!empty($products)) {
-    $total = array_reduce($products, function ($carry, $product) use ($conn) {
-        $productSql = "SELECT * FROM plecs_product WHERE product_id = " . $product['product_id'];
-        $productResult = $conn->query($productSql);
-
-        if ($productResult->num_rows > 0) {
-            $productData = $productResult->fetch_assoc();
-            $carry += $productData['price'] * $product['quantity'];
-        }
-
-        return $carry;
-    }, 0);
-
-    //$grandTotal = $total;
+// get_payment_amount.php
+class Payment {
+    public static function getPaymentAmount($grandTotal) {
+        return $grandTotal;
+    }
 }
-//$grandTotal1 = $grandTotal;
 
 
 ?>

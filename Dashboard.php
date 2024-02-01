@@ -38,20 +38,29 @@
 
         // Display the results
         echo '<div class="result-container">';
-        echo "<h1>$totalUsers</h1><p>Users</p>";
+        echo '<div class="result-box">';
+        echo '<img src="cl img/icons8-users-16.png" alt="Users Icon" width="40" height="40">'; // Users icon image
+        echo "<h1>$totalUsers</h1><h2>Users</h2>";
         echo '</div>';
 
         echo '<div class="result-container">';
-        echo "<h1>$totalOrders</h1><p>Orders</p>";
+        echo '<div class="result-box">';
+        echo '<img src="cl img/icons8-shopping-cart-50.png" alt="Orders Icon" width="40" height="40">'; // Orders icon image
+        echo "<h1>$totalOrders</h1><h2>Orders</h2>";
         echo '</div>';
 
         echo '<div class="result-container">';
-        echo "<h1>$totalFeedbacks</h1><p>Feedbacks</p>";
+        echo '<div class="result-box">';
+        echo '<img src="cl img/icons8-note-50.png" alt="Feedbacks Icon" width="40" height="40">'; // Feedbacks icon image
+        echo "<h1>$totalFeedbacks</h1><h2>Feedbacks</h2>";
         echo '</div>';
 
         echo '<div class="result-container">';
-        echo "<p>RM</p><h1>$totalIncomes</h1><p>Income</p>";
+        echo '<div class="result-box">';
+        echo '<img src="cl img/icons8-request-money-80.png" alt="Income Icon" width="40" height="40">'; // Income icon image
+        echo "<h2>RM</h2><h1>$totalIncomes</h1><h2>Income</h2>";
         echo '</div>';
+
 
     }
 
@@ -165,10 +174,14 @@
         while ($row = $revenueResult->fetch_assoc()) {
             // Extract month from the date (assuming date is in Y-m-d format)
             $month = date('M', strtotime($row['payment_date']));
+            $year = date('Y', strtotime($row['payment_date']));
 
             $revenueData['labels'][] = $month;
+            $revenueData['title'][] = $year;
             $revenueData['datasets'][0]['data'][] = $row['amount'];
         }
+        // Add the year as a title
+        $revenueData['title'] = $year;
     }
 
     // Fetch product data
@@ -203,27 +216,46 @@ if(!isset($_SESSION["Username"]))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Puff Lab Admin</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 
-<div class="page-content">
-</br></br></br>
+<div class="page_container">
+    <div class="page-content">
     <!-- Example content for page1.php -->
     <h1>Main Dashboard</h1>
+    <br><br>
+    <section>
     <?php
     // Call the function to display Summary.
     displaySummary();
     ?>
-    </br></br></br></br></br>
+    </section>
+    <br><br>
+    <section>
+    <h3>Market Analysis</h3>
+    <canvas class="chart" id="myPieChart" ></canvas>
+    </section>
+    <br><br>
+    <section>
+    <h3>Revenue Analysis</h3>
+    <canvas class="chart" id="revenueChart" ></canvas>
+    </div>
 
-    <h2>Market Analysis</h2></br></br>
-    <canvas id="myPieChart" width="50" height="50"></canvas>
-    </br></br></br></br></br>
-    <h2>Revenue Analysis</h2></br></br>
-    <canvas id="revenueChart" width="100" height="50"></canvas>
+    </section>
+    <br><br>
+    <section>
+    <h3>Latest Orders</h3>
+    <?php
+    // Call the function to display Summary.
+    DisplayOrders();
+    ?>
+    </section>
+
+    
+</div>
 
 <script>
 window.onload = function() 
@@ -246,6 +278,12 @@ window.onload = function()
                   beginAtZero: true,
               },
           },
+          plugins: {
+            title: {
+                display: true,
+                text: 'Revenue Chart (' + <?php echo json_encode($revenueData['title']); ?> + ')'
+            }
+        }
       },
   });
 
@@ -257,21 +295,17 @@ window.onload = function()
   {
     type: 'pie',
     data: productData,
+    options: {
+          plugins: {
+            title: {
+                display: true,
+                text: 'Hot Item Chart (' + <?php echo json_encode($revenueData['title']); ?> + ')'
+            }
+        }
+      },
   }); 
 };
 
 </script>
-</br></br></br></br>
-<h2>Orders</h2></br>
-    <?php
-    // Call the function to display Summary.
-    DisplayOrders();
-    ?>
-</div>
-
-    
-
-    
-
     
 </body>

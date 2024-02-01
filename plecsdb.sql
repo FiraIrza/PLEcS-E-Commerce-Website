@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2024 at 10:53 AM
+-- Generation Time: Feb 01, 2024 at 07:58 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -57,8 +57,8 @@ CREATE TABLE `plecs_cart` (
 --
 
 INSERT INTO `plecs_cart` (`cart_id`, `quantity`, `user_name`, `product_id`) VALUES
-(21, 1, 'user_name', 39),
-(22, 1, 'user_name', 40);
+(29, 1, 'user_name', 41),
+(30, 1, 'user_name', 40);
 
 -- --------------------------------------------------------
 
@@ -136,11 +136,10 @@ CREATE TABLE `plecs_payments` (
 --
 
 INSERT INTO `plecs_payments` (`payment_id`, `payment_date`, `payment_method`, `amount`, `user_name`) VALUES
-(2, '2024-01-18', 'QR code', '20.00', 'bambam2809'),
-(3, '2024-02-14', 'VISA', '34.00', 'syed'),
-(4, '2024-03-20', 'VISA', '90.00', 'syed'),
-(5, '2024-04-18', 'VISA', '100.00', 'bambam2809'),
-(6, '2024-01-18', 'VISA', '12.00', 'bambam16');
+(2, '2024-01-18', 'QR code', '6.00', 'bambam2809'),
+(3, '2024-02-14', 'VISA', '4.00', 'syed'),
+(4, '2024-03-20', 'VISA', '4.00', 'syed'),
+(6, '2024-01-18', 'VISA', '4.00', 'bambam16');
 
 -- --------------------------------------------------------
 
@@ -162,7 +161,6 @@ CREATE TABLE `plecs_product` (
 --
 
 INSERT INTO `plecs_product` (`product_id`, `product_cat`, `product_name`, `price`, `product_img`, `popularity`) VALUES
-(39, 'Premium Cream Puff', 'Oreo', '4.00', 'img/65a88b4b02289.jpg', 10),
 (40, 'Cold Beverages', 'Yam Latte', '6.00', 'img/65a88b60b6f54.jpg', 30),
 (41, 'Regular Cream Puff', 'Chocolate', '3.00', 'img/65a88b6f8a19d.jpg', 33),
 (42, 'Premium Cream Puff', 'Blueberry', '4.00', 'img/65a88b7bc19cb.jpg', 5),
@@ -210,6 +208,7 @@ CREATE TABLE `user_account` (
 INSERT INTO `user_account` (`user_name`, `email`, `password`) VALUES
 ('bambam16', 'bambam16@gmail.com', '$2y$10$IqJPAy9ZAuU/NPOxz.kD3.hQNcHSwBD1z0ZBj3lyf0TfSfZEvHTei'),
 ('bambam2809', 'bambam@gmail.com', '$2y$10$QqkyaF4WcvKeFXxmPgUE4uwwip7mQ0NQFqiTx2fPnZiYa6/ev9..q'),
+('shahira', 'shahira02@gmail.com', '$2y$10$qeHDrMKJ506laHZSx9Q0H./wylc3fvGxJnB3Zhp0EiLhQdQfIEgPi'),
 ('syed', 'syed160202@gmail.com', '$2y$10$pe6lFxCiefMmq.EtrVQOw.1XRqLmup7nHNUq/LR2OtYpeH0gGho0C');
 
 --
@@ -287,7 +286,7 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `plecs_cart`
 --
 ALTER TABLE `plecs_cart`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `plecs_feedback`
@@ -299,7 +298,7 @@ ALTER TABLE `plecs_feedback`
 -- AUTO_INCREMENT for table `plecs_order`
 --
 ALTER TABLE `plecs_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `plecs_order_item`
@@ -317,7 +316,7 @@ ALTER TABLE `plecs_payments`
 -- AUTO_INCREMENT for table `plecs_product`
 --
 ALTER TABLE `plecs_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `plecs_shipping`
