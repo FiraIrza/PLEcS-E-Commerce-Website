@@ -43,7 +43,20 @@ $conn -> close();
                 <img src="<?php echo $product['product_img']; ?>" alt="<?php echo $product['product_name']; ?>">
                 <div class="details">
                     <h2><?php echo $product['product_cat']; ?></h2>
-                    <p><?php echo $product['product_name']; ?>&emsp;&emsp;&emsp;&emsp;&nbsp;RM<?php echo $product['price']; ?></p>
+                    <p>
+                        <?php 
+                        // Sanitize and display the product name
+                        echo htmlspecialchars($product['product_name'], ENT_QUOTES, 'UTF-8'); 
+                        ?>
+                        &emsp;&emsp;&emsp;&emsp;&nbsp;
+                        RM
+                        <?php 
+                        // Check if price is valid and format it
+                        echo isset($product['price']) && is_numeric($product['price']) 
+                            ? number_format((float)$product['price'], 2, '.', '') 
+                            : 'N/A'; 
+                        ?>
+                    </p>
                     <form action="cart.php" method="post">  
                     <input type="hidden" name="update_cart" value='1'>
                     <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
