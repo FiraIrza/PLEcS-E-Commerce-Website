@@ -29,6 +29,7 @@ include 'header.php';
     <section id="bestsellings">
         <div class="caption">
             <h2>Best Sellings</h2>
+            <h2>Best Sellings</h2>
         </div>
         <div class="show">
             <a href="creamPuff.php"><button class="showall">Show All</button></a>
