@@ -109,8 +109,8 @@
     <h1>Orders</h1>
 
     <?php
-    // Call the function to display Feedbacks in a table
-    DisplayOrders();
+        // Call the function to display Feedbacks in a table
+        DisplayOrders();
     
     ?>
 </body>
